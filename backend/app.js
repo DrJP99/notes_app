@@ -2,10 +2,34 @@ const express = require('express')
 const cors = require('cors')
 const dotenv = require('dotenv').config()
 
+const middleware = require('./utils/middleware')
+
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 const db = require('./utils/db')
+
+app.use(
+	cors({
+		origin: '*',
+		credentials: true,
+	}),
+)
+
+// app.use((req, res) => {
+// 	const allowedDomains = ['http://localhost:8000']
+// 	const origin = req.headers.origin
+// 	console.log(origin)
+// 	if (allowedDomains.indexOf(origin) > -1) {
+// 		res.header('Access-Control-Allow-Origin', origin)
+// 	}
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Origin, X-Requested-With, Content-Type, Accept',
+// 	)
+// })
+
+app.use(middleware.requestLogger)
 
 app.get('/', (req, res) => {
 	res.json({ info: 'Node.js, Express and PostgreSQL API' })
