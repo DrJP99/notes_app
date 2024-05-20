@@ -134,3 +134,45 @@ code {
 		float: left;
 	}
 }
+
+.navbar {
+	background-color: $blue;
+	color: $fg;
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+		display: flex;
+
+		li {
+			margin: 10px;
+			padding: 10px;
+		}
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.navbar-item {
+			border: none;
+			background-color: inherit;
+			color: inherit;
+			font-weight: bold;
+
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+
+			width: auto;
+			white-space: nowrap;
+
+			&:hover {
+				cursor: pointer;
+				background-color: $fg;
+				color: $blue;
+			}
+		}
+	}
+}
