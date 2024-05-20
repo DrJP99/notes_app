@@ -1,14 +1,7 @@
-const { createServer } = require("node:http")
+const app = require('./app')
+const PORT = 3000
+const HOST = 'localhost'
 
-const hostname = "localhost"
-const port = 3000
-
-const server = createServer((req, res) => {
-	res.statusCode = 200
-	res.setHeader("Content-Type", "text/plain")
-	res.end("Hello World")
-})
-
-server.listen(port, hostname, () => {
-	console.log(`Server running at http://${hostname}:${port}/`)
+app.listen(PORT, HOST, () => {
+	console.log(`Server running at http://${HOST}:${PORT}/`)
 })
