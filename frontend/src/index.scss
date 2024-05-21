@@ -123,6 +123,14 @@ code {
 	&-accept {
 		background-color: $blue;
 	}
+
+	&-danger {
+		background-color: $red;
+	}
+
+	&-warning {
+		background-color: $yellow;
+	}
 }
 
 .float {

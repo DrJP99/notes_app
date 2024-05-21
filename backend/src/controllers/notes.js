@@ -48,11 +48,11 @@ notesRouter.post('/', async (req, res) => {
 // PUT update note
 notesRouter.put('/:id', async (req, res) => {
 	const id = req.params.id
-	const { title, body, archived } = req.body
+	const { title, body } = req.body
 
 	db.query(
-		'UPDATE notes SET title = $2, body = $3, archived = $4 WHERE note_id = $5 RETURNING *',
-		[id, title, body, archived],
+		'UPDATE notes SET title = $2, body = $3 WHERE note_id = $1 RETURNING *',
+		[id, title, body],
 		(error, result) => {
 			if (error) {
 				throw error
@@ -69,7 +69,7 @@ notesRouter.put('/:id', async (req, res) => {
 notesRouter.delete('/:id', async (req, res) => {
 	const id = req.params.id
 
-	db.query('DELETE FROM notes WHERE id $1', [id], (error, result) => {
+	db.query('DELETE FROM notes WHERE note_id = $1', [id], (error, result) => {
 		if (error) {
 			throw error
 		}

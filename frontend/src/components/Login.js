@@ -15,7 +15,6 @@ const LoginForm = () => {
 		e.preventDefault()
 
 		// there is no password validation
-		console.log(username, password)
 		dispatch(setUser(username))
 		navigate('/')
 	}

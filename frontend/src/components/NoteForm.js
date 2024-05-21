@@ -1,12 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import noteService from '../services/notes'
+import { useSelector } from 'react-redux'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const NoteForm = () => {
-	const [user, setUser] = useState('')
+	const user = useSelector((state) => state.user)
 	const [title, setTitle] = useState('')
 	const [body, setBody] = useState('')
+	const [creator, setCreator] = useState('')
 
-	const edit = false
+	const { id } = useParams()
+	const edit = id ? true : false
+	const navigate = useNavigate()
 
 	const formSubmit = async (e) => {
 		e.preventDefault()
@@ -17,23 +22,42 @@ const NoteForm = () => {
 			body: body,
 		}
 
-		noteService
-			.createNote(newNote)
-			.then((res) => console.log(res))
-			.catch((err) => console.error(err.message))
+		if (edit) {
+			noteService
+				.editNote(id, newNote)
+				.then((res) => {
+					navigate(`/note/${res.note_id}`)
+				})
+				.catch((err) => console.error(err.message))
+		} else {
+			noteService
+				.createNote(newNote)
+				.then((res) => {
+					navigate(`/note/${res.note_id}`)
+				})
+				.catch((err) => console.error(err.message))
+		}
 	}
+
+	useEffect(() => {
+		if (edit && id) {
+			noteService
+				.getOne(id)
+				.then((res) => {
+					setTitle(res.title)
+					setBody(res.body)
+					setCreator(res.created_by)
+				})
+				.catch((err) => console.error(err.message))
+		}
+		if (edit && ((creator && creator !== user) || !user)) {
+			navigate('/')
+		}
+	}, [creator, edit, id, navigate, user])
 
 	return (
 		<div className="form">
 			<form className="form-group" onSubmit={formSubmit}>
-				<label htmlFor="user">User</label>
-				<input
-					type="user"
-					value={user}
-					id="user"
-					name="user"
-					onChange={({ target }) => setUser(target.value)}
-				/>
 				<label htmlFor="title">Title</label>
 				<input
 					type="text"
