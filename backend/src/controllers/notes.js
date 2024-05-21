@@ -103,9 +103,9 @@ notesRouter.put('/archive/:id', async (req, res) => {
 			if (error) {
 				throw error
 			}
-			// if (result.rowCount === 0) {
-			// 	res.status(404).end()
-			// }
+			if (result.rowCount === 0) {
+				res.status(404).end()
+			}
 			res.status(200).json(result.rows)
 		},
 	)

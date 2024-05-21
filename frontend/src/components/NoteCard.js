@@ -7,6 +7,7 @@ const NoteCard = ({ note }) => {
 				<Link to={`/note/${note.note_id}`}>
 					<h3 className="card-title">{note.title}</h3>
 				</Link>
+				{note.archived ? <p>ARCHIVED</p> : <></>}
 				<p className="date">{note.create_dte}</p>
 				<p className="note-creator">{note.created_by}</p>
 			</div>
