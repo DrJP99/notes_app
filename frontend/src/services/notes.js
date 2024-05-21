@@ -9,5 +9,16 @@ const getAll = async () => {
 	return res.data
 }
 
-const noteService = { getAll }
+const getOne = async (id) => {
+	const req = axios.get(`baseUrl/${id}`)
+	const res = await req.data
+	return res
+}
+
+const createNote = async (note) => {
+	const res = await axios.post(baseUrl, note)
+	return res.data
+}
+
+const noteService = { getAll, getOne, createNote }
 export default noteService
