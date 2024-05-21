@@ -36,7 +36,10 @@ const NotePage = () => {
 
 	const onArchive = (e) => {
 		e.preventDefault()
-		console.log('Archive...')
+		noteService
+			.archiveNote(id)
+			.then((res) => setNote(res))
+			.catch((err) => console.error(err.message))
 	}
 
 	return (
@@ -44,6 +47,7 @@ const NotePage = () => {
 			{note ? (
 				<div>
 					<h2>{note.title}</h2>
+					{note.archived ? <p>archived</p> : <></>}
 					<p>{note.created_by}</p>
 					<p>{note.body}</p>
 					<p>Create on: {note.create_dte}</p>
@@ -62,7 +66,7 @@ const NotePage = () => {
 								className="btn btn-warning"
 								onClick={onArchive}
 							>
-								Archive
+								{note.archived ? 'Una' : 'A'}rchive
 							</button>
 						</div>
 					) : (

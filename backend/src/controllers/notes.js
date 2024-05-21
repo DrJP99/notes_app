@@ -94,6 +94,23 @@ notesRouter.put('/:id', async (req, res) => {
 	)
 })
 
+notesRouter.put('/archive/:id', async (req, res) => {
+	const id = req.params.id
+	db.query(
+		'UPDATE notes SET archived = NOT archived WHERE note_id = $1 RETURNING *',
+		[id],
+		(error, result) => {
+			if (error) {
+				throw error
+			}
+			// if (result.rowCount === 0) {
+			// 	res.status(404).end()
+			// }
+			res.status(200).json(result.rows)
+		},
+	)
+})
+
 // DELETE deletes a note
 notesRouter.delete('/:id', async (req, res) => {
 	const id = req.params.id

@@ -31,6 +31,11 @@ const editNote = async (id, note) => {
 	return res.data[0]
 }
 
+const archiveNote = async (id) => {
+	const res = await axios.put(`${baseUrl}/archive/${id}`)
+	return res.data[0]
+}
+
 const deleteNote = async (id) => {
 	const res = await axios.delete(`${baseUrl}/${id}`)
 	return res.data
@@ -42,6 +47,7 @@ const noteService = {
 	getUserNotes,
 	createNote,
 	editNote,
+	archiveNote,
 	deleteNote,
 }
 export default noteService
