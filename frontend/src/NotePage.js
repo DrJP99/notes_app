@@ -11,7 +11,6 @@ const NotePage = () => {
 		noteService
 			.getOne(id)
 			.then((res) => {
-				console.log(res)
 				setNote(res)
 			})
 			.catch((err) => console.error(err.message))
