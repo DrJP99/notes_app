@@ -1,20 +1,26 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import NoteCard from './NoteCard'
 import noteService from './services/notes'
 
 const Home = () => {
+	const [allNotes, setAllNotes] = useState([])
+
 	useEffect(() => {
 		noteService.getAll().then((res) => {
-			console.log(res)
+			setAllNotes(res)
 		})
 	}, [])
 
 	return (
 		<div className="Home">
 			<h1>My Notes App</h1>
-			<NoteCard />
-			<NoteCard />
-			<NoteCard />
+			{allNotes ? (
+				allNotes.map((note) => (
+					<NoteCard key={note.note_id} note={note} />
+				))
+			) : (
+				<p>Loading...</p>
+			)}
 		</div>
 	)
 }
