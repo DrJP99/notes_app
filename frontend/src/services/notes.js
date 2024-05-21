@@ -10,9 +10,9 @@ const getAll = async () => {
 }
 
 const getOne = async (id) => {
-	const req = axios.get(`baseUrl/${id}`)
-	const res = await req.data
-	return res
+	const req = axios.get(`${baseUrl}/${id}`)
+	const res = await req
+	return res.data[0]
 }
 
 const createNote = async (note) => {

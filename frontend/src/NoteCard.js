@@ -1,8 +1,12 @@
+import { Link } from 'react-router-dom'
+
 const NoteCard = ({ note }) => {
 	return (
 		<div className="note-card">
 			<div className="card-header">
-				<h3 className="card-title">{note.title}</h3>
+				<Link to={`/note/${note.note_id}`}>
+					<h3 className="card-title">{note.title}</h3>
+				</Link>
 				<p className="date">{note.create_dte}</p>
 				<p className="note-creator">{note.created_by}</p>
 			</div>
