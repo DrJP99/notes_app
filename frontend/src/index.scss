@@ -15,11 +15,23 @@ $light-aqua: #8ec07c;
 $gray: #a89984;
 $fg: #ebdbb2;
 
+$bg0_h: #1d2021;
+$bg0: #282828;
+$bg1: #3c3836;
+$bg2: #504945;
+$bg3: #665c54;
+$bg4: #7c6f64;
+
+$side-padding: 25%;
+$top-padding: 10px;
+
+* {
+	font-family: monospace, monospace;
+}
+
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-		sans-serif;
+	font-family: monospace, monospace;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	
@@ -27,8 +39,9 @@ body {
 	color: $fg;
 }
 
-
-
+.main {
+	padding: $top-padding $side-padding;
+}
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -41,19 +54,75 @@ code {
 	border-width: 3px;
 	border-color: $gray;
 
-	padding: 8px;
+	padding: 16px 24px;
 	margin: 10px;
 
 	.card-header {
-		margin-bottom: 50px;
+		margin-bottom: 16px;
+		border-bottom: $gray;
+		border-bottom-style: solid;
+		border-bottom-width: 2px;
 
-		.card-title {
-			margin: 16px;
-			// float: left;
+		.tags {
+			padding: 0 0 12px 0;
+			
+			.tag {
+			font-size: small;
+			font-weight: bold;
+			margin: 12px 0 0 0;
+			padding: 5px;
+			border-radius: 100px;
+			
+			&::before{
+				content: "#";
+			}
+			
+			&-archived {
+				background-color: $bg1;
+				color: $gray;
+			}
+		}
+	}
+		
+		&-top {
+			display: flex;
+			// padding-top: 6px;
+
+			.card-title {
+				margin: 0;
+			}
+	
+			.date {
+				display: inline;
+				margin: 0;
+				margin-left: auto;
+				color: $light-black;
+				// font-weight: bold;
+				
+				&::after {
+					content: " /";
+					font-weight: bold;
+					color: $fg;
+				}
+
+				&::before {
+					content: "/ ";
+					font-weight: bold;
+					color: $fg;
+				}
+			}
 		}
 
-		.date {
-			// float: right;
+
+		.note-creator {
+			color: $green;
+			font-weight: bold;
+
+			&::before {
+				font-weight: bold;
+				color: $fg;
+				content: "> ";
+			}
 		}
 	}
 
@@ -66,7 +135,6 @@ code {
 	display: flex;
 	border: 3px solid $gray;
 	border-radius: 3px;
-	width: 50%;
 	margin: auto;
 
 	.form-group {
@@ -168,6 +236,7 @@ code {
 .navbar {
 	background-color: $blue;
 	color: $fg;
+	padding: 0 $side-padding;
 
 	ul {
 		list-style-type: none;
@@ -205,4 +274,22 @@ code {
 			}
 		}
 	}
+}
+
+a {
+	color: $purple;
+	text-decoration: none;
+
+	&:hover {
+		background: $purple;
+		color: $bg;
+	}
+}
+
+h1 {
+	color: $red;
+}
+
+h2 {
+	color: $yellow
 }
