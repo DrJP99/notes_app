@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import noteService from './services/notes'
 
 const NoteForm = () => {
 	const [user, setUser] = useState('')
@@ -10,7 +11,16 @@ const NoteForm = () => {
 	const formSubmit = async (e) => {
 		e.preventDefault()
 
-		console.log('helllo')
+		const newNote = {
+			created_by: user,
+			title: title,
+			body: body,
+		}
+
+		noteService
+			.createNote(newNote)
+			.then((res) => console.log(res))
+			.catch((err) => console.error(err.message))
 	}
 
 	return (

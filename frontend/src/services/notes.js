@@ -16,6 +16,7 @@ const getOne = async (id) => {
 }
 
 const createNote = async (note) => {
+	console.log(note)
 	const res = await axios.post(baseUrl, note)
 	return res.data
 }
