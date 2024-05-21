@@ -128,10 +128,12 @@ code {
 .float {
 	&-right {
 		float: right;
+		margin-left: auto;
 	}
 
 	&-left {
 		float: left;
+		margin-right: auto;
 	}
 }
 
