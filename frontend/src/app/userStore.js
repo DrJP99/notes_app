@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { useReducer } from 'react'
+
+import userReducer from './userSlice'
 
 export default configureStore({
-	reducer: { user: useReducer },
+	reducer: { user: userReducer },
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
 			immutableCheck: false,
