@@ -1,8 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Home from './Home'
-import NoteForm from './NoteForm'
-import Navbar from './Navbar'
-import NotePage from './NotePage'
+import Home from './components/Home'
+import NoteForm from './components/NoteForm'
+import Navbar from './components/Navbar'
+import NotePage from './components/NotePage'
 
 const App = () => {
 	return (

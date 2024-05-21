@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import noteService from './services/notes'
+import noteService from '../services/notes'
 import { useParams } from 'react-router-dom'
 
 const NotePage = () => {

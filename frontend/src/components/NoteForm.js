@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import noteService from './services/notes'
+import noteService from '../services/notes'
 
 const NoteForm = () => {
 	const [user, setUser] = useState('')

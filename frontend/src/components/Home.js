@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import NoteCard from './NoteCard'
-import noteService from './services/notes'
+import noteService from '../services/notes'
 
 const Home = () => {
 	const [allNotes, setAllNotes] = useState([])
