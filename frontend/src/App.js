@@ -5,6 +5,7 @@ import Navbar from './components/Navbar'
 import NotePage from './components/NotePage'
 import LoginForm from './components/Login'
 import Logout from './components/Logout'
+import User from './components/User'
 
 const App = () => {
 	return (
@@ -13,6 +14,7 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/note/:id" element={<NotePage />} />
+				<Route path="/me" element={<User />} />
 				<Route path="/add" element={<NoteForm />} />
 				<Route path="/edit/:id" element={<NoteForm />} />
 				<Route path="/login" element={<LoginForm />} />

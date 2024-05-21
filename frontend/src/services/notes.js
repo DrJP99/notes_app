@@ -15,6 +15,12 @@ const getOne = async (id) => {
 	return res.data[0]
 }
 
+const getUserNotes = async (user) => {
+	const req = axios.get(`${baseUrl}/user/${user}`)
+	const res = await req
+	return res.data
+}
+
 const createNote = async (note) => {
 	const res = await axios.post(baseUrl, note)
 	return res.data[0]
@@ -30,5 +36,12 @@ const deleteNote = async (id) => {
 	return res.data
 }
 
-const noteService = { getAll, getOne, createNote, editNote, deleteNote }
+const noteService = {
+	getAll,
+	getOne,
+	getUserNotes,
+	createNote,
+	editNote,
+	deleteNote,
+}
 export default noteService

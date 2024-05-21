@@ -15,10 +15,10 @@ const Navbar = () => {
 						<Link to={'/add'} className="navbar-item">
 							<li>Add Note</li>
 						</Link>
-						<Link
-							to={'/logout'}
-							className="navbar-item float-right"
-						>
+						<Link to={'/me'} className="navbar-item float-right">
+							<li>{user}</li>
+						</Link>
+						<Link to={'/logout'} className="navbar-item">
 							<li>Logout</li>
 						</Link>
 					</>

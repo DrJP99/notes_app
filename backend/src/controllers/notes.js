@@ -43,7 +43,7 @@ notesRouter.get('/:id', async (req, res) => {
 	)
 })
 
-notesRouter.get('/:user', async (req, res) => {
+notesRouter.get('/user/:user', async (req, res) => {
 	// returns all notes made by a user, including archived notes
 	const user = req.params.user
 	db.query(
