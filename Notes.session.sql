@@ -1,3 +1,4 @@
+-- set time/date format
 -- creating tables
 CREATE TABLE notes (
 	note_id SERIAL,
@@ -5,7 +6,7 @@ CREATE TABLE notes (
 	title VARCHAR(50) NOT NULL,
 	body VARCHAR(280) NOT NULL,
 	archived BOOLEAN NOT NULL DEFAULT false,
-	create_dte DATE NOT NULL DEFAULT CURRENT_DATE,
+	create_dte TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY(note_id)
 );
 CREATE TABLE tags (
@@ -22,7 +23,7 @@ VALUES (
 		'My first note',
 		'Hello, this is my first note!',
 		false,
-		'2024-05-20 14:17:36-05'
+		'2024-05-20 14:17:36' -- '14:17 20/05/2024'
 	);
 INSERT INTO notes(created_by, title, body, archived, create_dte)
 VALUES (
@@ -30,7 +31,7 @@ VALUES (
 		'A child is born',
 		'There has been a child born today',
 		true,
-		'1999-10-16 16:02:13-05'
+		'1999-10-16 16:02:13' -- '16:02 16/10/1999'
 	);
 INSERT INTO notes(created_by, title, body)
 VALUES ('test', 'Hello world', 'Hello world!');

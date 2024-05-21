@@ -25,8 +25,15 @@ $bg4: #7c6f64;
 $side-padding: 25%;
 $top-padding: 10px;
 
+$radius: 10px;
+
 * {
 	font-family: monospace, monospace;
+
+	&::selection {
+		background: $fg;
+		color: $bg;
+	}
 }
 
 body {
@@ -50,7 +57,7 @@ code {
 
 .note-card {
 	border-style: solid;
-	border-radius: 10px;
+	border-radius: $radius;
 	border-width: 3px;
 	border-color: $gray;
 
@@ -63,26 +70,6 @@ code {
 		border-bottom-style: solid;
 		border-bottom-width: 2px;
 
-		.tags {
-			padding: 0 0 12px 0;
-			
-			.tag {
-			font-size: small;
-			font-weight: bold;
-			margin: 12px 0 0 0;
-			padding: 5px;
-			border-radius: 100px;
-			
-			&::before{
-				content: "#";
-			}
-			
-			&-archived {
-				background-color: $bg1;
-				color: $gray;
-			}
-		}
-	}
 		
 		&-top {
 			display: flex;
@@ -114,16 +101,7 @@ code {
 		}
 
 
-		.note-creator {
-			color: $green;
-			font-weight: bold;
 
-			&::before {
-				font-weight: bold;
-				color: $fg;
-				content: "> ";
-			}
-		}
 	}
 
 	.card-body {
@@ -131,10 +109,43 @@ code {
 	}
 }
 
+.tags {
+	padding: 0 0 12px 0;
+
+	.tag {
+		font-size: small;
+		font-weight: bold;
+		margin: 12px 0 0 0;
+		padding: 5px;
+		border-radius: 100px;
+
+		&::before {
+			content: "#";
+		}
+
+		&-archived {
+			background-color: $bg1;
+			color: $gray;
+		}
+	}
+}
+
+.note-creator {
+	color: $green;
+	font-weight: bold;
+	margin: 8px 0 16px 0;
+
+	&::before {
+		font-weight: bold;
+		color: $fg;
+		content: "> ";
+	}
+}
+
 .form {
 	display: flex;
 	border: 3px solid $gray;
-	border-radius: 3px;
+	border-radius: $radius;
 	margin: auto;
 
 	.form-group {
@@ -154,7 +165,7 @@ code {
 			width: 100%;
 			padding: 10px;
 			margin-bottom: 10px;
-			border-radius: 3px;
+			border-radius: $radius;
 			border: 3px solid $gray;
 			background-color: $bg;
 			color: $fg;
@@ -167,7 +178,7 @@ code {
 			width: 100%;
 			padding: 10px;
 			margin-bottom: 10px;
-			border-radius: 3px;
+			border-radius: $radius;
 			border: 3px solid $gray;
 			background-color: $bg;
 			color: $fg;
@@ -182,7 +193,7 @@ code {
 
 .btn {
 	padding: 10px 40px;
-	border-radius: 3px;
+	border-radius: $radius;
 	border: none;
 	font-weight: bold;
 	cursor: pointer;
@@ -217,6 +228,24 @@ code {
 
 		&:hover {
 			background-color: $light-yellow;
+		}
+	}
+
+	&-gray {
+		background-color: $light-black;
+
+		&:hover {
+				background-color: $gray;
+			}
+	}
+
+	&-goback {
+		padding: 6px;
+		font-size: small;
+		margin: 12px 0;
+
+		&::before {
+			content: "<- ";
 		}
 	}
 }
@@ -292,4 +321,41 @@ h1 {
 
 h2 {
 	color: $yellow
+}
+
+.note {
+	border-radius: $radius;
+	border-color: $gray;
+	border-style: solid;
+	padding: 32px;
+
+	&-header {
+		margin-bottom: 32px;
+		border-bottom: $gray;
+		border-bottom-width: 2px;
+		border-bottom-style: solid;
+	}
+
+	&-body {
+		padding: 16px;
+		background-color: $bg0_h;
+		border-radius: $radius;
+	}
+
+	&-date {
+		color: $light-black;
+	}
+
+	&-buttons {
+		margin-top: 32px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: x-large;
+	}
+
+
 }

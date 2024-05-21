@@ -22,6 +22,15 @@ const NoteForm = () => {
 			body: body,
 		}
 
+		console.log(body.length)
+
+		if (body.length > 280) {
+			console.error(
+				'Body length must be less than or equal to 280 characters',
+			)
+			return
+		}
+
 		if (edit) {
 			noteService
 				.editNote(id, newNote)

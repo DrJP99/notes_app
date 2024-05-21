@@ -43,40 +43,62 @@ const NotePage = () => {
 	}
 
 	return (
-		<div>
-			{note ? (
-				<div>
-					<h2>{note.title}</h2>
-					{note.archived ? <p>archived</p> : <></>}
-					<p>{note.created_by}</p>
-					<p>{note.body}</p>
-					<p>Create on: {note.create_dte}</p>
-					{user === note.created_by ? (
-						<div>
-							<button
-								className="btn btn-danger"
-								onClick={onDelete}
-							>
-								Delete
-							</button>
-							<button className="btn btn-accept" onClick={onEdit}>
-								Edit
-							</button>
-							<button
-								className="btn btn-warning"
-								onClick={onArchive}
-							>
-								{note.archived ? 'Una' : 'A'}rchive
-							</button>
+		<>
+			<div className="note">
+				{note ? (
+					<div>
+						<div className="note-header">
+							<h2>{note.title}</h2>
+
+							<p className="note-creator">{note.created_by}</p>
 						</div>
-					) : (
-						<></>
-					)}
-				</div>
-			) : (
-				<p>Loading...</p>
-			)}
-		</div>
+						<p className="note-body">{note.body}</p>
+						<p className="note-date">{note.create_dte}</p>
+						<div className="tags">
+							{note.archived ? (
+								<span className="tag tag-archived">
+									ARCHIVED
+								</span>
+							) : (
+								<></>
+							)}
+						</div>
+						{user === note.created_by ? (
+							<div className="note-buttons">
+								<button
+									className="btn btn-danger"
+									onClick={onDelete}
+								>
+									Delete
+								</button>
+								<button
+									className="btn btn-accept"
+									onClick={onEdit}
+								>
+									Edit
+								</button>
+								<button
+									className="btn btn-warning"
+									onClick={onArchive}
+								>
+									{note.archived ? 'Una' : 'A'}rchive
+								</button>
+							</div>
+						) : (
+							<></>
+						)}
+					</div>
+				) : (
+					<p>Loading...</p>
+				)}
+			</div>
+			<button
+				className="btn btn-gray btn-goback"
+				onClick={() => navigate(-1)}
+			>
+				Go Back
+			</button>
+		</>
 	)
 }
 
