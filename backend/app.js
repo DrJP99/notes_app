@@ -22,6 +22,8 @@ app.get('/', (req, res) => {
 })
 
 const notesRouter = require('./src/controllers/notes')
+const tagsRouter = require('./src/controllers/tags')
 app.use('/notes', notesRouter)
+app.use('/tags', tagsRouter)
 
 module.exports = app
