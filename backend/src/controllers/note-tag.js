@@ -5,6 +5,8 @@ const db = require('../../utils/db')
 notetagRouter.post('/', async (req, res) => {
 	const { note_id, added_tags, removed_tags } = req.body
 
+	console.log(req.body)
+
 	qAdd = `INSERT INTO note_tag (note_id, tag_id)
 		VALUES ($1, $2)`
 
@@ -24,7 +26,7 @@ notetagRouter.post('/', async (req, res) => {
 		})
 	})
 
-	res.status(200).send("Note's tags updated")
+	res.status(200).send({ note_id: note_id })
 })
 
 module.exports = notetagRouter
