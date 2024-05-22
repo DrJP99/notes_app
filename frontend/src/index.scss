@@ -115,7 +115,7 @@ code {
 	.tag {
 		font-size: small;
 		font-weight: bold;
-		margin: 12px 0 0 0;
+		margin: 12px 8px 0 0;
 		padding: 5px;
 		border-radius: 100px;
 
@@ -126,6 +126,23 @@ code {
 		&-archived {
 			background-color: $bg1;
 			color: $gray;
+		}
+
+		&-red {
+			background-color: $red;
+			color: $fg;
+		}
+
+		&-green {
+			background-color: $green;
+		}
+
+		&-purple {
+			background-color: $purple;
+		}
+
+		&-blue {
+			background-color: $blue;
 		}
 	}
 }

@@ -4,9 +4,21 @@ const NoteCard = ({ note }) => {
 	return (
 		<div className="note-card">
 			<div className="card-header">
-				{note.archived ? (
+				{note.archived || note.tags ? (
 					<div className="tags">
-						<span className="tag tag-archived">ARCHIVED</span>
+						{note.archived ? (
+							<span className="tag tag-archived">ARCHIVED</span>
+						) : (
+							<></>
+						)}
+						{note.tags.map((tag) => (
+							<span
+								className={`tag tag-${tag.color}`}
+								key={tag.tag_id}
+							>
+								{tag.tag_name}
+							</span>
+						))}
 					</div>
 				) : (
 					<></>

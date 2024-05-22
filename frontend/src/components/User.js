@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import noteService from '../services/notes'
 import NoteCard from './NoteCard'
+import { tagFiller } from '../utils/tagFiller'
 
 const User = () => {
 	const user = useSelector((state) => state.user)
@@ -12,6 +13,7 @@ const User = () => {
 	useEffect(() => {
 		noteService
 			.getUserNotes(user)
+			.then((res) => tagFiller(res))
 			.then((res) => setAllNotes(res))
 			.catch((err) => console.error(err.message))
 	}, [user])
