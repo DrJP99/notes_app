@@ -15,8 +15,10 @@ const tagFillerHelper = (note, allTags) => {
 	}
 }
 
-export const tagFiller = async (notes) => {
-	const allTags = await tagService.getAll()
+export const tagFiller = async (notes, allTags = null) => {
+	if (!allTags) {
+		allTags = await tagService.getAll()
+	}
 	// const newTags = []
 
 	if (Array.isArray(notes)) {

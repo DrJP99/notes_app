@@ -115,12 +115,16 @@ code {
 	.tag {
 		font-size: small;
 		font-weight: bold;
-		margin: 12px 8px 0 0;
+		margin: 0 8px 0 0;
 		padding: 5px;
 		border-radius: 100px;
 
 		&::before {
 			content: "#";
+		}
+
+		&-undefined {
+			display: none;
 		}
 
 		&-archived {
@@ -143,6 +147,35 @@ code {
 
 		&-blue {
 			background-color: $blue;
+		}
+	}
+
+	&-selector {
+		padding: 16px 8px;
+		border-radius: $radius;
+
+		.tag {
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		&-selected {
+			background-color: $bg1;
+
+			&::before {
+				content: "Selected tags: \a\a";
+				white-space: pre;
+			}
+		}
+
+		&-avail {
+			background-color: $bg0_h;
+
+			&::before {
+				content: "Other available tags: \a\a";
+				white-space: pre;
+			}
 		}
 	}
 }
@@ -203,7 +236,7 @@ code {
 		}
 
 		.form-footer {
-			// display: flex;
+			margin-top: 16px;
 		}
 	}
 }
