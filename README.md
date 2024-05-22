@@ -1,5 +1,19 @@
 # Full Stack Implementation Exercise
 
+To start the services, simply run the script `start.sh`, make sure that you have execution rights for both `start.sh` and `setup_db.sh` and that the postgres server is running.
+
+```bash
+sudo systemctl start postgresql
+chmod u+x start.sh setup_db.sh
+./start.sh
+```
+
+_All running and testing was done in Fedora 40, the command to start the postgres server may be different on your distribution._
+
+If you get an error connecting to Postgres, take a look inside `.env` to check that the credentials and host are correct.
+
+The front-end server will be running on port `8000` while the back-end on port `3000`.
+
 ## Technologies used
 
 ### Frontend
