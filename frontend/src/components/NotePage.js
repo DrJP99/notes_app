@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import noteService from '../services/notes'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { tagFiller } from '../utils/tagFiller'
 
 const NotePage = () => {
 	const [note, setNote] = useState()
@@ -13,6 +14,7 @@ const NotePage = () => {
 	useEffect(() => {
 		noteService
 			.getOne(id)
+			.then((res) => tagFiller(res))
 			.then((res) => {
 				setNote(res)
 			})
@@ -54,15 +56,29 @@ const NotePage = () => {
 						</div>
 						<p className="note-body">{note.body}</p>
 						<p className="note-date">{note.create_dte}</p>
-						<div className="tags">
-							{note.archived ? (
-								<span className="tag tag-archived">
-									ARCHIVED
-								</span>
-							) : (
-								<></>
-							)}
-						</div>
+						{note.archived || note.tags ? (
+							<div className="tags">
+								{note.archived ? (
+									<span className="tag tag-archived">
+										ARCHIVED
+									</span>
+								) : (
+									<></>
+								)}
+								{note.tags.map((tag) => {
+									return (
+										<span
+											className={`tag tag-${tag.color}`}
+											key={tag.tag_id}
+										>
+											{tag.tag_name}
+										</span>
+									)
+								})}
+							</div>
+						) : (
+							<></>
+						)}
 						{user === note.created_by ? (
 							<div className="note-buttons">
 								<button

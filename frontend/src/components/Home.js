@@ -8,9 +8,7 @@ const Home = () => {
 
 	useEffect(() => {
 		noteService.getAll().then((res) => {
-			// console.log(tagFiller(res))
 			tagFiller(res).then((res) => {
-				console.log(res)
 				setAllNotes(res)
 			})
 		})
