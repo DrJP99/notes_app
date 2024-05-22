@@ -4,20 +4,48 @@ const db = require('../../utils/db')
 // GET all notes or a specific note
 notesRouter.get('/', async (req, res) => {
 	// doesn't return archived notes
-	db.query(
-		'SELECT * FROM notes WHERE archived = false ORDER BY note_id ASC',
-		(error, result) => {
-			if (error) {
-				throw error
-			}
-			res.status(200).json(result.rows)
-		},
-	)
+	q = `SELECT n.note_id, 
+	n.created_by, 
+	n.title, 
+	n.body, 
+	n.archived, 
+	TO_CHAR (n.create_dte, 'HH24:MM - DD/MM/YYYY') as create_dte, 
+	array_agg(t.tag_id) as tags
+	FROM notes as n
+	LEFT JOIN note_tag as nt
+		ON n.note_id = nt.note_id
+	LEFT JOIN tags as t
+		ON t.tag_id = nt.tag_id
+	WHERE n.archived = false
+	GROUP BY n.note_id
+	ORDER BY n.create_dte DESC`
+
+	db.query(q, (error, result) => {
+		if (error) {
+			throw error
+		}
+		res.status(200).json(result.rows)
+	})
 })
 
 notesRouter.get('/all', async (req, res) => {
 	// returns all, including archived
-	db.query('SELECT * FROM notes ORDER BY note_id ASC', (error, result) => {
+	q = `SELECT n.note_id, 
+	n.created_by, 
+	n.title, 
+	n.body, 
+	n.archived, 
+	TO_CHAR (n.create_dte, 'HH24:MM - DD/MM/YYYY') as create_dte, 
+	array_agg(t.tag_id) as tags
+	FROM notes as n
+	LEFT JOIN note_tag as nt
+		ON n.note_id = nt.note_id
+	LEFT JOIN tags as t
+		ON t.tag_id = nt.tag_id
+	GROUP BY n.note_id
+	ORDER BY n.create_dte DESC`
+
+	db.query(q, (error, result) => {
 		if (error) {
 			throw error
 		}
@@ -27,35 +55,59 @@ notesRouter.get('/all', async (req, res) => {
 
 notesRouter.get('/:id', async (req, res) => {
 	const id = req.params.id
-	db.query(
-		'SELECT * FROM notes WHERE note_id = $1',
-		[id],
-		(error, result) => {
-			if (error) {
-				throw error
-			}
-			if (result.rowCount === 0) {
-				res.status(404).end()
-			} else {
-				res.status(200).json(result.rows)
-			}
-		},
-	)
+	const q = `SELECT n.note_id, 
+	n.created_by, 
+	n.title, 
+	n.body, 
+	n.archived, 
+	TO_CHAR (n.create_dte, 'HH24:MM - DD/MM/YYYY') as create_dte, 
+	array_agg(t.tag_id) as tags
+	FROM notes as n
+	LEFT JOIN note_tag as nt
+		ON n.note_id = nt.note_id
+	LEFT JOIN tags as t
+		ON t.tag_id = nt.tag_id
+	WHERE n.note_id = $1
+	GROUP BY n.note_id
+	ORDER BY n.create_dte DESC`
+
+	db.query(q, [id], (error, result) => {
+		if (error) {
+			throw error
+		}
+		if (result.rowCount === 0) {
+			res.status(404).end()
+		} else {
+			res.status(200).json(result.rows)
+		}
+	})
 })
 
 notesRouter.get('/user/:user', async (req, res) => {
 	// returns all notes made by a user, including archived notes
 	const user = req.params.user
-	db.query(
-		'SELECT * FROM notes WHERE created_by = $1 ORDER BY note_id ASC',
-		[user],
-		(error, result) => {
-			if (error) {
-				throw error
-			}
-			res.status(200).json(result.rows)
-		},
-	)
+	const q = `SELECT n.note_id, 
+	n.created_by, 
+	n.title, 
+	n.body, 
+	n.archived, 
+	TO_CHAR (n.create_dte, 'HH24:MM - DD/MM/YYYY') as create_dte, 
+	array_agg(t.tag_id) as tags
+	FROM notes as n
+	LEFT JOIN note_tag as nt
+		ON n.note_id = nt.note_id
+	LEFT JOIN tags as t
+		ON t.tag_id = nt.tag_id
+	WHERE n.created_by = $1
+	GROUP BY n.note_id
+	ORDER BY n.create_dte DESC`
+
+	db.query(q, [user], (error, result) => {
+		if (error) {
+			throw error
+		}
+		res.status(200).json(result.rows)
+	})
 })
 
 // POST create note

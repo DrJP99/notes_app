@@ -1,4 +1,3 @@
--- set time/date format
 -- creating tables
 CREATE TABLE notes (
 	note_id SERIAL,
@@ -12,9 +11,16 @@ CREATE TABLE notes (
 CREATE TABLE tags (
 	tag_id SERIAL,
 	tag_name VARCHAR(10) NOT NULL,
+	color VARCHAR(10),
+	PRIMARY KEY(tag_id)
+);
+CREATE TABLE note_tag (
+	nt_id SERIAL,
 	note_id INT NOT NULL,
-	PRIMARY KEY(tag_id),
-	CONSTRAINT fk_notes FOREIGN KEY(note_id) REFERENCES notes(note_id)
+	tag_id INT NOT NULL,
+	PRIMARY KEY(nt_id),
+	CONSTRAINT fk_notes FOREIGN KEY(note_id) REFERENCES notes(note_id),
+	CONSTRAINT fk_tags FOREIGN KEY(tag_id) REFERENCES tags(tag_id)
 );
 -- inserting notes
 INSERT INTO notes(created_by, title, body, archived, create_dte)
@@ -36,11 +42,30 @@ VALUES (
 INSERT INTO notes(created_by, title, body)
 VALUES ('test', 'Hello world', 'Hello world!');
 -- inserting tags
-INSERT INTO tags (tag_name, note_id)
-VALUES('important', 2);
-INSERT INTO tags (tag_name, note_id)
-VALUES('test', 3);
-INSERT INTO tags (tag_name, note_id)
-VALUES('exciting', 1);
-INSERT INTO tags (tag_name, note_id)
-VALUES('important', 1);
+INSERT INTO tags(tag_name, color)
+VALUES ('important', 'red');
+INSERT INTO tags(tag_name, color)
+VALUES ('school', 'blue');
+INSERT INTO tags(tag_name, color)
+VALUES ('work', 'green');
+INSERT INTO tags(tag_name, color)
+VALUES ('home', 'purple');
+-- inserting note_tags
+INSERT INTO note_tag(note_id, tag_id)
+VALUES (1, 1);
+INSERT INTO note_tag(note_id, tag_id)
+VALUES (1, 3);
+INSERT INTO note_tag(note_id, tag_id)
+VALUES (2, 4);
+INSERT INTO note_tag(note_id, tag_id)
+VALUES (3, 2);
+INSERT INTO note_tag(note_id, tag_id)
+VALUES (3, 3);
+-- INSERT INTO tags (tag_name, note_id)
+-- VALUES('important', 2);
+-- INSERT INTO tags (tag_name, note_id)
+-- VALUES('test', 3);
+-- INSERT INTO tags (tag_name, note_id)
+-- VALUES('exciting', 1);
+-- INSERT INTO tags (tag_name, note_id)
+-- VALUES('important', 1);
