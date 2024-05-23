@@ -117,7 +117,13 @@ const User = () => {
 			)}
 			<button
 				className={`btn btn-${hide ? 'good' : 'warning'}`}
-				onClick={(_) => setHide(!hide)}
+				onClick={(_) => {
+					setHide(!hide)
+					setFilters(filters.filter((f) => f !== 'arch'))
+					if (checked[archIndex] && hide) {
+						setFilters([...filters, 'arch'])
+					}
+				}}
 			>
 				{hide ? 'Show' : 'Hide'} Archived Notes
 			</button>
