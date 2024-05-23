@@ -38,11 +38,12 @@ $radius: 10px;
 
 body {
 	margin: 0;
+	padding: 0;
 	font-family: monospace, monospace;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	
-	background-color: $bg;
+	background-color: $bg0;
 	color: $fg;
 }
 
@@ -313,6 +314,7 @@ code {
 }
 
 .navbar {
+	margin-top: 0;
 	background-color: $blue;
 	color: $fg;
 	padding: 0 $side-padding;
