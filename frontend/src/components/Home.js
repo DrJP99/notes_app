@@ -30,10 +30,7 @@ const Home = () => {
 			setFilteredNotes(
 				filters.length === 0
 					? allNotes
-					: // : allNotes.filter((note) =>
-					  // 		note.tags.every((t) => filters.includes(t.tag_id)),
-					  //   ),
-					  allNotes.filter((note) =>
+					: allNotes.filter((note) =>
 							filters.every((f) =>
 								note.tags.map((t) => t.tag_id).includes(f),
 							),

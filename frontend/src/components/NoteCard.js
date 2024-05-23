@@ -6,11 +6,11 @@ const NoteCard = ({ note }) => {
 			<div className="card-header">
 				{note.archived || note.tags ? (
 					<div className="tags">
-						{note.archived ? (
+						{/* {note.archived ? (
 							<span className="tag tag-archived">ARCHIVED</span>
 						) : (
 							<></>
-						)}
+						)} */}
 						{note.tags.map((tag) => (
 							<span
 								className={`tag tag-${tag.color}`}
