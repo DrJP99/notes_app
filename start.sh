@@ -15,6 +15,7 @@ yes_or_no "Do you want to setup the DB? (This will DROP the database and create 
 # install dependencies
 cd frontend
 npm install
+npm run build
 
 cd ../backend
 npm install
@@ -23,7 +24,7 @@ cd ..
 
 # start services
 cd frontend 
-npm start&
+npx serve -s build -p 8000&
 cd ../backend
 npm start&
 
