@@ -409,3 +409,21 @@ h2 {
 
 
 }
+
+.filter-select {
+	margin-bottom: 16px;
+	background-color: $bg0_h;
+	padding: 16px 16px;
+	border-radius: $radius;
+
+	&::before {
+		content: "Filters: \a\a";
+		white-space: pre;
+		font-size: large;
+		font-weight: bold;
+	}
+
+	span {
+		margin-right: 16px;
+	}
+}
