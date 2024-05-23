@@ -52,7 +52,7 @@ const Home = () => {
 		<div className="Home">
 			<h1>My Notes App</h1>
 			{allTags ? (
-				<div>
+				<div className="filter-select">
 					{allTags.map((tag, i) => (
 						<span key={tag.tag_id}>
 							<input

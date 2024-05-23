@@ -11,20 +11,23 @@ const User = () => {
 	const [allNotes, setAllNotes] = useState()
 
 	const [allTags, setAllTags] = useState()
-	const [filteredNotes, setFilteredNotes] = useState([])
+	const [filteredNotes, setFilteredNotes] = useState()
 	const [filters, setFilters] = useState([])
 	const [checked, setChecked] = useState()
+
+	const [archIndex, setArchIndex] = useState(0)
 
 	useEffect(() => {
 		if (!allTags) {
 			tagService.getAll().then((res) => {
-				setAllTags(res)
-				setChecked(res.map((r) => false))
+				setAllTags([...res])
+				const newArr = [...res.map((r) => false), false]
+				setArchIndex(newArr.length - 1)
+				setChecked(newArr)
 			})
 		}
 
 		if (!allNotes && allTags) {
-			setChecked([...checked, false])
 			noteService
 				.getUserNotes(user)
 				.then((res) => tagFiller(res, allTags))
@@ -50,6 +53,13 @@ const User = () => {
 				.catch((err) => console.error(err.message))
 		}
 
+		if (allNotes && !filteredNotes) {
+			setFilteredNotes(allNotes)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allNotes, allTags, filteredNotes, filters, user])
+
+	useEffect(() => {
 		if (allNotes) {
 			setFilteredNotes(
 				filters.length === 0
@@ -61,7 +71,7 @@ const User = () => {
 					  ),
 			)
 		}
-	}, [allNotes, allTags, filters, user])
+	}, [filters])
 
 	const handleFilter = (value, i) => {
 		setChecked(checked.map((c, pos) => (i === pos ? !c : c)))
@@ -76,7 +86,7 @@ const User = () => {
 		<div>
 			<h1>{user}</h1>
 			{allTags ? (
-				<div>
+				<div className="filter-select">
 					{allTags.map((tag, i) => (
 						<span key={tag.tag_id}>
 							<input
@@ -84,8 +94,8 @@ const User = () => {
 								id={tag.tag_id}
 								name={tag.tag_name}
 								value={tag.tag_id}
-								checked={checked[i + 1]}
-								onChange={() => handleFilter(tag.tag_id, i + 1)}
+								checked={checked[i]}
+								onChange={() => handleFilter(tag.tag_id, i)}
 							/>
 							<label htmlFor={tag.tag_id}>{tag.tag_name}</label>
 						</span>
@@ -96,8 +106,8 @@ const User = () => {
 							id="arch"
 							name="arch"
 							value="arch"
-							checked={checked[0]}
-							onChange={() => handleFilter('arch', 0)}
+							checked={checked[archIndex]}
+							onChange={() => handleFilter('arch', archIndex)}
 						/>
 						<label htmlFor="arch">archived</label>
 					</span>
