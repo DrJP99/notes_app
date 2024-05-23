@@ -1,0 +1,431 @@
+$bg: #282828;
+$light-black: #928374;
+$red: #cc241d;
+$light-red: #fb4934;
+$green: #98971a;
+$light-green: #b8bb26;
+$yellow: #d79921;
+$light-yellow: #fabd2f;
+$blue: #458588;
+$light-blue: #83a598;
+$purple: #b16286;
+$light-purple: #d3869b;
+$aqua: #689d6a;
+$light-aqua: #8ec07c;
+$gray: #a89984;
+$fg: #ebdbb2;
+
+$bg0_h: #1d2021;
+$bg0: #282828;
+$bg1: #3c3836;
+$bg2: #504945;
+$bg3: #665c54;
+$bg4: #7c6f64;
+
+$side-padding: 25%;
+$top-padding: 10px;
+
+$radius: 10px;
+
+* {
+	font-family: monospace, monospace;
+
+	&::selection {
+		background: $fg;
+		color: $bg;
+	}
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: monospace, monospace;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	
+	background-color: $bg0;
+	color: $fg;
+}
+
+.main {
+	padding: $top-padding $side-padding;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+.note-card {
+	border-style: solid;
+	border-radius: $radius;
+	border-width: 3px;
+	border-color: $gray;
+
+	padding: 16px 24px;
+	margin: 10px;
+
+	.card-header {
+		margin-bottom: 16px;
+		border-bottom: $gray;
+		border-bottom-style: solid;
+		border-bottom-width: 2px;
+
+		
+		&-top {
+			display: flex;
+			// padding-top: 6px;
+
+			.card-title {
+				margin: 0;
+			}
+	
+			.date {
+				display: inline;
+				margin: 0;
+				margin-left: auto;
+				color: $light-black;
+				// font-weight: bold;
+				
+				&::after {
+					content: " /";
+					font-weight: bold;
+					color: $fg;
+				}
+
+				&::before {
+					content: "/ ";
+					font-weight: bold;
+					color: $fg;
+				}
+			}
+		}
+
+
+
+	}
+
+	// .card-body {
+	// 	// float: left;
+	// }
+}
+
+.tags {
+	padding: 0 0 12px 0;
+
+	.tag {
+		font-size: small;
+		font-weight: bold;
+		margin: 0 8px 0 0;
+		padding: 5px;
+		border-radius: 100px;
+
+		&::before {
+			content: "#";
+		}
+
+		&-undefined {
+			display: none;
+		}
+
+		&-archived {
+			background-color: $bg1;
+			color: $gray;
+		}
+
+		&-red {
+			background-color: $red;
+			color: $fg;
+		}
+
+		&-green {
+			background-color: $green;
+		}
+
+		&-purple {
+			background-color: $purple;
+		}
+
+		&-blue {
+			background-color: $blue;
+		}
+	}
+
+	&-selector {
+		padding: 16px 8px;
+		border-radius: $radius;
+
+		.tag {
+			&:hover {
+				cursor: pointer;
+			}
+		}
+
+		&-selected {
+			background-color: $bg1;
+
+			&::before {
+				content: "Selected tags: \a\a";
+				white-space: pre;
+			}
+		}
+
+		&-avail {
+			background-color: $bg0_h;
+
+			&::before {
+				content: "Other available tags: \a\a";
+				white-space: pre;
+			}
+		}
+	}
+}
+
+.note-creator {
+	color: $green;
+	font-weight: bold;
+	margin: 8px 0 16px 0;
+
+	&::before {
+		font-weight: bold;
+		color: $fg;
+		content: "> ";
+	}
+}
+
+.form {
+	display: flex;
+	border: 3px solid $gray;
+	border-radius: $radius;
+	margin: auto;
+
+	.form-group {
+		padding: 20px;
+		flex: 1;
+
+		label {
+			display: block;
+			margin-bottom: 5px;
+			font-size: 1.25em;
+		}
+
+		input {
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: $radius;
+			border: 3px solid $gray;
+			background-color: $bg;
+			color: $fg;
+		}
+
+		textarea {
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			width: 100%;
+			padding: 10px;
+			margin-bottom: 10px;
+			border-radius: $radius;
+			border: 3px solid $gray;
+			background-color: $bg;
+			color: $fg;
+			resize: none;
+		}
+
+		.form-footer {
+			margin-top: 16px;
+		}
+	}
+}
+
+.btn {
+	padding: 10px 40px;
+	border-radius: $radius;
+	border: none;
+	font-weight: bold;
+	cursor: pointer;
+	color: $fg;
+
+	&-accept {
+		background-color: $blue;
+
+		&:hover {
+			background-color: $light-blue;
+		}
+	}
+
+	&-good {
+		background-color: $green;
+
+		&:hover {
+			background-color: $light-green;
+		}
+	}
+
+	&-danger {
+		background-color: $red;
+
+		&:hover {
+			background-color: $light-red;
+		}
+	}
+
+	&-warning {
+		background-color: $yellow;
+
+		&:hover {
+			background-color: $light-yellow;
+		}
+	}
+
+	&-gray {
+		background-color: $light-black;
+
+		&:hover {
+				background-color: $gray;
+			}
+	}
+
+	&-goback {
+		padding: 6px;
+		font-size: small;
+		margin: 12px 0;
+
+		&::before {
+			content: "<- ";
+		}
+	}
+}
+
+.float {
+	&-right {
+		float: right;
+		margin-left: auto;
+	}
+
+	&-left {
+		float: left;
+		margin-right: auto;
+	}
+}
+
+.navbar {
+	margin-top: 0;
+	background-color: $blue;
+	color: $fg;
+	padding: 0 $side-padding;
+
+	ul {
+		list-style-type: none;
+		padding: 0;
+		display: flex;
+
+		li {
+			margin: 10px;
+			padding: 10px;
+		}
+
+		a {
+			text-decoration: none;
+			color: inherit;
+		}
+
+		.navbar-item {
+			border: none;
+			background-color: inherit;
+			color: inherit;
+			font-weight: bold;
+
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+
+			width: auto;
+			white-space: nowrap;
+
+			&:hover {
+				cursor: pointer;
+				background-color: $fg;
+				color: $blue;
+			}
+		}
+	}
+}
+
+a {
+	color: $purple;
+	text-decoration: none;
+
+	&:hover {
+		background: $purple;
+		color: $bg;
+	}
+}
+
+h1 {
+	color: $red;
+}
+
+h2 {
+	color: $yellow
+}
+
+.note {
+	border-radius: $radius;
+	border-color: $gray;
+	border-style: solid;
+	padding: 32px;
+
+	&-header {
+		margin-bottom: 32px;
+		border-bottom: $gray;
+		border-bottom-width: 2px;
+		border-bottom-style: solid;
+	}
+
+	&-body {
+		padding: 16px;
+		background-color: $bg0_h;
+		border-radius: $radius;
+	}
+
+	&-date {
+		color: $light-black;
+	}
+
+	&-buttons {
+		margin-top: 16px;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: x-large;
+	}
+
+
+}
+
+.filter-select {
+	margin-bottom: 16px;
+	background-color: $bg0_h;
+	padding: 16px 16px;
+	border-radius: $radius;
+
+	&::before {
+		content: "Filters: \a\a";
+		white-space: pre;
+		font-size: large;
+		font-weight: bold;
+	}
+
+	span {
+		margin-right: 16px;
+	}
+}
