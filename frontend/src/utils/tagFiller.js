@@ -11,7 +11,7 @@ const tagFillerHelper = (note, allTags) => {
 
 		return { ...note, tags: newTagObjects }
 	} else {
-		return { ...note, tags: null }
+		return { ...note, tags: [] }
 	}
 }
 
