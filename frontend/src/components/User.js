@@ -71,7 +71,7 @@ const User = () => {
 					  ),
 			)
 		}
-	}, [filters])
+	}, [allNotes, filters])
 
 	const handleFilter = (value, i) => {
 		setChecked(checked.map((c, pos) => (i === pos ? !c : c)))
